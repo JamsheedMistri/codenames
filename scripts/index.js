@@ -12,11 +12,11 @@ var spyMasterMode = false;
 var sessionData = [];
 var customData = [];
 
-var COLOR_RED = "#ff0000";
-var COLOR_YELLOW = "#ffff00";
-var COLOR_BLUE = "#00eeee";
-var COLOR_BLACK = "#808080";
-var COLOR_GREEN = "#009000";
+var COLOR_RED = "#ff3333";
+var COLOR_YELLOW = "#ffdf80";
+var COLOR_BLUE = "#66ccff";
+var COLOR_BLACK = "#a3a3a3";
+var COLOR_GREEN = "#00cc66";
 
 //init
 $("#seed").keyup(function() {
@@ -86,9 +86,8 @@ function createNewGame() {
 		var word = sessionData[randomNumber];
 		removeItem(sessionData, randomNumber);
 		wordsSelected.push(word);
-		trs[i % 5] += "<div class=\"word\" id=\'" + i + "\' onclick=\"clicked(\'" + i + "\')\"><div><a href=\"#\"><span class=\"ada\"></span>" + word + "</a></div></div>";
+		trs[i % 5] += `<div class="word" id="${i}" onclick="clicked('${i}')"><div><a href="#">${word}</a></div></div>`;
 	}
-	//<a href="#"><span class="ada">Washington stimulates economic growth </span>Read me</a>
 	for (var i = 0; i < trs.length; i++) {
 		document.getElementById("board").innerHTML += '<div class="row">' + trs[i] + '</div>'
 	}
@@ -134,18 +133,9 @@ function clicked(value) {
 	} else {
 		//guessers mode
 		var word = wordsSelected[value];
-		if (document.getElementById("confirm").checked) {
-			if (window.confirm("Are sure you want to select '" + word + "'?")) {
-				document.getElementById(value).style.backgroundColor = teams[value];
-				if (teams[value] == "black") {
-					document.getElementById(value).style.color = "white";
-				}
-			}
-		} else {
-			document.getElementById(value).style.backgroundColor = teams[value];
-			if (teams[value] == "black") {
-				document.getElementById(value).style.color = "white";
-			}
+		document.getElementById(value).style.backgroundColor = teams[value];
+		if (teams[value] == "black") {
+			document.getElementById(value).style.color = "white";
 		}
 	}
 	updateScore();
@@ -159,20 +149,20 @@ function updateScore() {
 		redScore = 0;
 		$('div.word').each(function() {
 			var color = $(this).css('background-color');
-			if (color === 'rgb(0, 238, 238)') {
+			if (color === 'rgb(102, 204, 255)') {
 				blueScore++;
 			}
-			if (color === 'rgb(255, 0, 0)') {
+			if (color === 'rgb(255, 51, 51)') {
 				redScore++;
 			}
 		});
 	} else {
 		$('div.word').each(function() {
 			var color = $(this).css('background-color');
-			if (color === 'rgb(0, 238, 238)') {
+			if (color === 'rgb(102, 204, 255)') {
 				blueScore--;
 			}
-			if (color === 'rgb(255, 0, 0)') {
+			if (color === 'rgb(255, 51, 51)') {
 				redScore--;
 			}
 		});
